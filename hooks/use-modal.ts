@@ -1,7 +1,12 @@
 import { Subscription } from "@prisma/client";
 import { create } from "zustand";
 
-export type ModalType = "buySubscription" | "changeSlot" | "cancelSubscription";
+export type ModalType =
+    | "buySubscription"
+    | "changeSlot"
+    | "cancelSubscription"
+    | "subscriptionPayment"
+    | "cancelSubscription";
 
 interface ModalData {
     subscription?: Subscription;

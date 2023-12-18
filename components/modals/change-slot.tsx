@@ -52,6 +52,10 @@ const ChangeSubscriptionModal = () => {
     const router = useRouter();
 
     const { subscription } = data;
+    const curr = new Date();
+    const isActive =
+        subscription && subscription?.startDate <= curr && subscription?.endDate >= curr;
+
     const currentSlot = subscription?.slot || YogaSlots.s1_6TO7;
 
     const form = useForm({
@@ -67,7 +71,11 @@ const ChangeSubscriptionModal = () => {
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            await axios.post("api/subscriptions", values);
+            if (isActive) {
+                await axios.post("api/subscriptions", values);
+            } else {
+                await axios.patch(`/api/subscriptions/${subscription?.id}`, values);
+            }
             form.reset();
             router.refresh();
             onClose();
@@ -89,7 +97,9 @@ const ChangeSubscriptionModal = () => {
                         Book Your Slot
                     </DialogTitle>
                     <DialogDescription className="text-zinc-500">
-                        Your changes will be applied from next month
+                        {isActive
+                            ? "Your changes will be applied from next month"
+                            : "You can change this slot"}
                     </DialogDescription>
                     <DialogDescription className="text-xl font-semibold ">
                         Current Slot: {slotMap[currentSlot]}

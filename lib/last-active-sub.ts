@@ -15,6 +15,7 @@ export const LastActiveSub = async () => {
             endDate: {
                 gt: curr,
             },
+            cancel: false,
         },
         orderBy: {
             endDate: "desc",
