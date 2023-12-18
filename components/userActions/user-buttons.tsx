@@ -15,12 +15,15 @@ const UserButtonAction = () => {
     };
     return (
         <div className="flex items-center gap-x-2">
-            <Button className="h-6 w-max text-xs md:text-lg" onClick={() => handelClick("a")}>
+            <Button
+                className="h-6 md:h-9 w-max text-xs md:text-lg"
+                onClick={() => handelClick("a")}
+            >
                 Sign in
             </Button>
             <Button
                 onClick={() => handelClick("b")}
-                className="bg-white text-black hover:text-white h-6 w-max text-xs md:text-lg"
+                className="bg-white text-black hover:text-white h-6 md:h-9 w-max text-xs md:text-lg"
             >
                 Sign Up
             </Button>

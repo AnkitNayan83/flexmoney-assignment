@@ -22,14 +22,14 @@ const Navbar = async () => {
 
             <div className="flex items-center gap-2 md:gap-x-12">
                 <a href="/subscriptions">
-                    <Button className="hidden md:flex">Book a slot</Button>
+                    <Button className="hidden h-9 md:flex">Book a slot</Button>
                 </a>
                 {profile ? (
                     <UserButton
                         afterSignOutUrl="/"
                         appearance={{
                             elements: {
-                                avatarBox: "md:h-[48px] w-md:[48px]",
+                                avatarBox: "md:h-[48px] md:w-[48px]",
                             },
                         }}
                     />
