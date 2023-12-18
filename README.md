@@ -10,7 +10,18 @@ The yoga app is an online platform where you can enrol for yoga classes for just
 - #### For Payment
     Users can pay anytime.
 - #### Cnacel
-    They can also cancel their subscription.   
+    They can also cancel their subscription.
+
+
+## ER Diagram and Table
+
+<br/>
+<p align="center">
+<img src="./public/er.png" alt="ER">
+<img src="./public/table.png" alt="Table">
+</p>
+<br/>
+
 
 ## Requirements
 
