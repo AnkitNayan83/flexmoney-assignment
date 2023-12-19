@@ -24,7 +24,6 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { useForm } from "react-hook-form";
@@ -33,8 +32,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { YogaSlots } from "@prisma/client";
 import { useModal } from "@/hooks/use-modal";
-import { db } from "@/lib/db";
-import { LastActiveSub } from "@/lib/last-active-sub";
 
 const formSchema = z.object({
     type: z.nativeEnum(YogaSlots),
@@ -58,10 +55,12 @@ const ChangeSubscriptionModal = () => {
 
     const currentSlot = subscription?.slot || YogaSlots.s1_6TO7;
 
+    let notCurrentSlot: YogaSlots = YogaSlots.s1_6TO7;
+
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            type: YogaSlots.s1_6TO7,
+            type: notCurrentSlot,
         },
     });
 
@@ -128,15 +127,18 @@ const ChangeSubscriptionModal = () => {
                                                 </SelectTrigger>
                                             </FormControl>
                                             <SelectContent>
-                                                {Object.values(YogaSlots).map((type) => (
-                                                    <SelectItem
-                                                        value={type}
-                                                        key={type}
-                                                        className="uppercase"
-                                                    >
-                                                        {slotMap[type].toUpperCase()}
-                                                    </SelectItem>
-                                                ))}
+                                                {Object.values(YogaSlots).map((type, i) => {
+                                                    if (type === subscription?.slot) return null;
+                                                    return (
+                                                        <SelectItem
+                                                            value={type}
+                                                            key={type}
+                                                            className="uppercase"
+                                                        >
+                                                            {slotMap[type].toUpperCase()}
+                                                        </SelectItem>
+                                                    );
+                                                })}
                                             </SelectContent>
                                         </Select>
                                         <FormMessage />
